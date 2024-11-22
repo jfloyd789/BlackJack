@@ -12,6 +12,36 @@ public class Deck {
             }
         }
         cardsLeft = cards.size();
+        shuffle();
     }
 
-}
+        public void shuffle() {
+            for ( int i = cards.size() - 1; i> 0; i--) { 
+                int codyIsACutie = (int) (Math.random() * ( i + 1));
+
+                Card appap = cards.get(i);
+                cards.set(i, cards.get(codyIsACutie));
+                cards.set(codyIsACutie, appap);
+            }
+
+            cardsLeft = cards.size();
+        }
+
+        public int getCardsLeft() {
+            return cardsLeft;
+        }
+
+        public boolean isEmpty() {
+            return cardsLeft == 0; 
+        }
+
+        public Card deal() {
+            if (isEmpty()) {
+                return null;
+            }
+            cardsLeft--;
+            return cards.get(cardsLeft);
+        }
+    }
+
+
