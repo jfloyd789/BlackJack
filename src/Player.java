@@ -39,7 +39,7 @@ public class Player {
 
     public String toString() {
         return name + " has " + points + " points\n " + 
-        name + "sigma" + hand;
+        name + "has" + hand;
     }
     
 }
