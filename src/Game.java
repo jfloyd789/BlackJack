@@ -3,6 +3,7 @@ public class Game {
     private Deck deck;
     private Player player;
     private Player dealer;
+    private Scanner scanner;
 
     public Game() {
         final String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -12,6 +13,7 @@ public class Game {
         deck = new Deck(ranks, suits, values);
         player = new Player("Player");
         dealer = new Player("Dealer");
+        this.scanner = new Scanner(System.in);
 
     }
     
@@ -32,16 +34,36 @@ public class Game {
         }
         return value;
     }
-
+    // TODO: UPDATE POINTS
     public void playGame() {
+        boolean stillPlaying = true;
+        while (stillPlaying) {
+            playHand();
+            while (true) {
+                System.out.println("Would you like to keep playing? (y/n)");
+                String choice = scanner.nextLine();
+                if (choice.equals("y")) {
+                    break;
+                }
+                else if (choice.equals("n")) {
+                    return;
+                }
+                else {
+                    System.out.println("please enter either 'y' or 'n'");
+                }
+            }
+        }
+    }
 
-       // both the player and the dealer need two cards 
+
+    public void playHand() {
+        // both the player and the dealer need two cards 
         player.addCard(deck.deal());        
         player.addCard(deck.deal());
         dealer.addCard(deck.deal());
         dealer.addCard(deck.deal());
 
-        Scanner scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
 
 
         
@@ -68,6 +90,10 @@ public class Game {
         }
         if (handValue(player) > 21 ){
             System.out.println("you busted you lose");
+            // clear both player's hands
+            player.clearHand();
+            dealer.clearHand();
+            return;
 
         }
 
@@ -80,6 +106,10 @@ public class Game {
 
         if(handValue(dealer)> 21){
             System.out.println("dealer busted");
+            // clear both player's hands
+            player.addPoints(1);
+            player.clearHand();
+            dealer.clearHand();
             return;
         }
 
@@ -92,6 +122,7 @@ public class Game {
 
         if (playerScore > dealerScore){
             System.out.println("you win");
+            player.addPoints(1);
         }
         else if (playerScore < dealerScore){
             System.out.println("dealer wins");
@@ -99,12 +130,10 @@ public class Game {
         else{
             System.out.println("tie");
         }
-
-        
+        // clear both player's hands
+        player.clearHand();
+        dealer.clearHand();
     }
-
-
-
 
 
 

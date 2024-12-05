@@ -36,10 +36,12 @@ public class Player {
     public void addCard(Card card) {
         hand.add(card);
     }
+    public void clearHand() {
+        this.hand = new ArrayList<Card>();
+    }
 
     public String toString() {
         return name + " has " + points + " points\n " + 
         name + "has" + hand;
     }
-    
 }
