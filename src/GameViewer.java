@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Image;
 
 
 public class GameViewer extends JFrame {
@@ -33,6 +32,13 @@ public class GameViewer extends JFrame {
         game.getPlayer().drawHand(g, 300, 500, this, cardBack);
         game.getDealer().drawHand(g, 320, 200, this, cardBack);
         g.drawImage(cardBack, 400, 200, 75, 125, this);
+
+
+
+        g.setColor(Color.WHITE);  // Set text color
+        g.setFont(new Font("Arial", Font.BOLD, 24)); // Set font
+        g.drawString("Player Score: " + game.getPlayer().getPoints(), 50, 50);  // Display score
+        g.drawString("Dealer Score: " + game.getDealer().getPoints(), 50, 80); // Display dealer score
     }
 
 
