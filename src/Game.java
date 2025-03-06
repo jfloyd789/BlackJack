@@ -4,16 +4,18 @@ public class Game {
     private Player player;
     private Player dealer;
     private Scanner scanner;
+    private GameViewer viewer;
 
     public Game() {
-        final String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-        final String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-        final int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
+        final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        final String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
+        final int[] values = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
 
         deck = new Deck(ranks, suits, values);
         player = new Player("Player");
         dealer = new Player("Dealer");
         this.scanner = new Scanner(System.in);
+        viewer = new GameViewer(this);
 
     }
     
@@ -36,6 +38,8 @@ public class Game {
     }
     // TODO: UPDATE POINTS
     public void playGame() {
+
+
         boolean stillPlaying = true;
         while (stillPlaying) {
             playHand();
@@ -62,7 +66,11 @@ public class Game {
         player.addCard(deck.deal());
         dealer.addCard(deck.deal());
         dealer.addCard(deck.deal());
+        
+        
+        viewer.repaint();
 
+        
         this.scanner = new Scanner(System.in);
 
 
@@ -87,6 +95,7 @@ public class Game {
             else {
                 System.out.println("please enter either 'h' or 's'");
             }
+            viewer.repaint();
         }
         if (handValue(player) > 21 ){
             System.out.println("you busted you lose");
@@ -133,11 +142,19 @@ public class Game {
         // clear both player's hands
         player.clearHand();
         dealer.clearHand();
+        viewer.repaint();
     }
 
+    
 
 
-
+    public Player getPlayer() {
+        return player;
+    }
+    
+    public Player getDealer() {
+        return dealer;
+    }
 
     public static void main(String[] args)  {
     Game g = new Game();

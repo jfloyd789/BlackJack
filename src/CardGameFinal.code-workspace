@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "Resources",
+			"path": "../../Cs2 Card Game Floyd/Resources"
+		},
+		{
+			"name": "Cs2-Card-Game",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"src"
+		],
+		"java.project.outputPath": "bin",
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar"
+		]
+	}
+}

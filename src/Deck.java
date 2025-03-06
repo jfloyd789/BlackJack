@@ -1,3 +1,8 @@
+import javax.swing.*;
+import java.awt.*;
+
+import javax.swing.ImageIcon;
+
 import java.util.ArrayList;
 public class Deck {
     private ArrayList<Card> cards; // list if cards
@@ -6,22 +11,29 @@ public class Deck {
     //construct a deck of cards using a nested loop
     public Deck(String[] ranks, String[] suits, int[] values) {
         cards = new ArrayList<>();
-        for (String suit : suits) {
-            for (int i = 0; i < ranks.length; i++) {
-                cards.add(new Card(ranks[i], suit, values[i]));
+        
+        int index = 1;  // Start at 1 to match your image filenames (1.png, 2.png, ...)
+    
+        for (int i = 0; i < ranks.length; i++) {  // Loop through ranks first
+            for (String suit : suits) {  // Then loop through suits
+                String imagePath = "Resources/Cards (1)/" + index + ".png";
+            
+                cards.add(new Card(ranks[i], suit, values[i], new ImageIcon(imagePath).getImage()));
+                index++; 
             }
         }
         cardsLeft = cards.size();
-        shuffle();
+        shuffle(); 
     }
+    
 
         public void shuffle() {
             for ( int i = cards.size() - 1; i> 0; i--) { 
-                int codyIsACutie = (int) (Math.random() * ( i + 1));
+                int randomIndex = (int) (Math.random() * ( i + 1));
 
-                Card appap = cards.get(i);
-                cards.set(i, cards.get(codyIsACutie));
-                cards.set(codyIsACutie, appap);
+                Card temp = cards.get(i);
+                cards.set(i, cards.get(randomIndex));
+                cards.set(randomIndex, temp);
             }
 
             cardsLeft = cards.size();

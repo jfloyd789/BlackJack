@@ -1,3 +1,7 @@
+import java.awt.Graphics;
+import java.awt.Image;
+
+
 import java.util.ArrayList;
 public class Player {
     
@@ -11,6 +15,14 @@ public class Player {
         this.points = 0;
     }
     
+    public void drawHand(Graphics g, int startX, int startY, GameViewer viewer, Image cardBack) {
+        int x = startX;
+        for (Card card : hand) {
+            card.drawcard(g, x, startY, viewer, cardBack);
+            x += 80; // Move the next card to the right
+        }
+    }
+
     public Player(String name, ArrayList<Card> hand) {
         this.name = name;
         this.hand = hand;
